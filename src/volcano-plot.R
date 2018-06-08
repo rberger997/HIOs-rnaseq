@@ -49,7 +49,7 @@ data$samp <- factor(data$samp, levels = c('PBS', 'STM', 'SE'))
 
 ## set up facet plot
 plot <- ggplot(data = data, aes(x = log2FoldChange, y = -log10(padj))) +
-  geom_point(shape = 21, size = .25, aes(fill = status, color = status)) +
+  geom_point(shape = 21, size = .5, aes(fill = status, color = status)) +
   facet_grid(samp ~ .) +
   ## set axis limits and labels
   xlim(c(-4.25,4.25)) +
@@ -61,11 +61,11 @@ plot <- ggplot(data = data, aes(x = log2FoldChange, y = -log10(padj))) +
   scale_color_manual(values = c("grey70", color.set[1], color.set[2])) +
   theme(
     strip.text = element_text(size = 12),
-    axis.text = element_text(size = 8.5),
-    axis.title = element_text(size = 8.5),
+    axis.text = element_text(size = 12),
+    axis.title = element_text(size = 12),
     legend.position = "none",
     panel.background = element_blank(),
-    panel.grid = element_line(size = .25),
+    panel.grid = element_line(size = .35),
     panel.border = element_rect(fill = NA,
                                 color = "grey85",
                                 size = 1)				    
@@ -73,10 +73,14 @@ plot <- ggplot(data = data, aes(x = log2FoldChange, y = -log10(padj))) +
 plot
 
 ## save pdf of plot
-pdf('../img/volcano-facet.pdf', width = 3, height = 6, onefile = FALSE)
+pdf('../img/volcano-facet.pdf', width = 2.55, height = 4.5, onefile = FALSE)
 plot
 dev.off()
 
+## save png of plot
+png('../img/volcano-facet.png', width = 2.55, height = 4.5, units = 'in', res = 300)
+plot
+dev.off()
 
 ## -----------------------------------------------------------------------------
 ## David's PNG format

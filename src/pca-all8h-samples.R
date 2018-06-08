@@ -18,6 +18,13 @@ load('../results/DESeq2/all-8h-samples/dds.Rdata')
 ## use argument blind = FALSE when multiple replicates are present
 rld <- DESeq2::rlog(dds, blind = FALSE)
 
+## Save rlog object
+save(rld, file = '../results/DESeq2/all-8h-samples/rld.Rdata')
+
+## Load rlog object
+load('../results/DESeq2/all-8h-samples/rld.Rdata')
+
+
 ## Set order of cell line id
 colData(rld)$cell_line_id <- factor(colData(rld)$cell_line_id)
 colData(rld)$cell_line_id <- factor(colData(rld)$cell_line_id, 
@@ -59,6 +66,6 @@ plot
 
 ## save png of plot
 png(filename = "../img/pca.png",
-    width = 1200, height = 400)
+    width = 1600, height = 500)
 print(plot)
 dev.off()
