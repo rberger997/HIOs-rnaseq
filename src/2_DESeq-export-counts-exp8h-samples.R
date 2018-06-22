@@ -14,9 +14,8 @@ dir.create(path = results.dir, recursive = TRUE)
 
 ## read in table with sample metadata
 ## load using the UM core provided sample submission form
-samples <- readr::read_csv(file = "../results/kallisto-Run_1822/sample_key2.csv") %>% 
+samples <- readr::read_csv(file = "../results/kallisto-Run_1822/sample_key3.csv") %>% 
   filter(hr == 8 & code_name != 'HIOs+PMNs' & code_name != 'PMN')
-
 
 # Set up path to read files into tximport
 files <- file.path(kallisto.results.dir, samples$file_name, 'abundance.tsv')
@@ -59,7 +58,7 @@ library(DESeq2)
 
 dds <- DESeq2::DESeqDataSetFromTximport(txi,
                                         colData = samples,
-                                        design = ~ code_name) # hr ~ status
+                                        design = ~ new_code)
 ## pre-filter out counts < 1
 dds <- dds[rowSums(counts(dds)) > 1, ]
 

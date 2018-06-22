@@ -28,7 +28,7 @@ dds <- DESeq2::DESeq(dds)
 ## Set up function for making and saving differential expression files
 
 diff_expression <- function(dds, sample1,sample2){
-  contrast <- c('code_name', sample1, sample2) # factor name, numerator condition, denominator condition
+  contrast <- c('new_code', sample1, sample2) # factor name, numerator condition, denominator condition
 res <- results(dds, contrast = contrast)
 
 ## Add annotation - symbol and entrezID
@@ -59,13 +59,12 @@ print(paste(sample1, 'over', sample2, 'done'))
 }
 
 ## Run differential expression for all sample+PMN over sample
-unique(colData(dds)$code_name)
+unique(colData(dds)$new_code)
 
-diff_expression(dds, 'Styphimurium+PMNs', 'Styphimurium')
-diff_expression(dds, 'SEnt+PMNs', 'Senteritidis')
+diff_expression(dds, 'STM+PMNs', 'STM')
+diff_expression(dds, 'SE+PMNs', 'SE')
 diff_expression(dds, 'PBS+PMNs', 'PBS')
 
-
+## Clean up
 rm(list = ls())
-# End module. Proceed to gene summary table, MA plot, heatmaps, etc.
 #------------------------------------------------------------
